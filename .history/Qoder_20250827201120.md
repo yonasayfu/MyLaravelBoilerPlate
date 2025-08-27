@@ -1,0 +1,142 @@
+# 🤖 Qoder Agent Interaction Template
+
+This template defines how the Qoder AI agent should interact with the user for each new module or request, following a learning-focused approach.
+
+## 📚 Key Reference Documents
+
+Before implementing any new module or feature, refer to these essential documents:
+
+1. **[README.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/README.md)** - Project overview and getting started guide
+2. **[ROADMAP_AND_PROGRESS.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/ROADMAP_AND_PROGRESS.md)** - Implementation roadmap and current progress tracking
+3. **[ARCHITECTURE_AND_COMPONENTS.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/ARCHITECTURE_AND_COMPONENTS.md)** - Architecture patterns, components, and data flow
+4. **[PHASE_TRACKING.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/PHASE_TRACKING.md)** - Tracking of files created in each phase
+
+These documents provide the foundation for all implementation decisions and should be referenced to maintain consistency.
+
+## 🎯 Interaction Pattern
+
+### 1. Request Analysis
+- Understand the user's specific request
+- Identify the module or feature to be implemented
+- Determine the phase in the roadmap
+- Review relevant sections in reference documents
+
+### 2. Learning-Focused Approach
+- Explain the purpose and benefits of each component
+- Show integration points with existing code
+- Provide best practices and design patterns
+- Reference architecture documentation for consistency
+- No automated code generation without explicit user request
+
+### 3. Step-by-Step Guidance
+- Break down implementation into logical steps
+- Explain each file's role in the architecture
+- Provide code structure and examples
+- Wait for user confirmation before proceeding
+- Update tracking documents after implementation
+
+## 📋 Template for New Modules/Features
+
+### Module: [Module Name]
+
+#### Purpose
+Explain what this module does and why it's needed.
+
+#### Integration Points
+- How it connects to existing components
+- Which services it uses
+- Which controllers interact with it
+- Database relationships
+
+#### Implementation Steps
+1. **Model Creation**
+   - Fields and relationships
+   - Methods and scopes
+   - Integration with existing models
+
+2. **DTO Creation**
+   - Validation rules
+   - Data transformation logic
+   - Integration with BaseDTO
+
+3. **Service Layer**
+   - Business logic implementation
+   - Caching strategies
+   - Integration with BaseService/PerformanceOptimizedBaseService
+
+4. **Controllers**
+   - Web controller (AdminController)
+   - API controller (Api/V1/)
+   - Integration with OptimizedBaseController/BaseApiController
+
+5. **Database**
+   - Migrations
+   - Factories for testing
+   - Seeders for sample data
+
+6. **Testing**
+   - Feature tests
+   - Unit tests for services
+   - API tests
+
+#### Benefits
+- What this module adds to the boilerplate
+- Performance improvements
+- User experience enhancements
+
+## 🚀 For Each File Creation
+
+### File: [File Path]
+
+#### Purpose
+Explain the specific purpose of this file.
+
+#### Integration
+- How it connects to other components
+- Dependencies and relationships
+- Usage patterns
+
+#### Code Structure
+```php
+// Basic structure and key methods
+```
+
+#### Best Practices Applied
+- Design patterns used
+- Security considerations
+- Performance optimizations
+
+## 🧪 Testing Approach
+
+### Test File: [Test File Path]
+
+#### What to Test
+- Specific functionality
+- Edge cases
+- Integration points
+
+#### Test Structure
+```php
+// Example test structure
+```
+
+## 📚 Documentation Updates
+
+### Files to Update
+- [PHASE_TRACKING.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/PHASE_TRACKING.md) - Track implementation progress
+- [ARCHITECTURE_AND_COMPONENTS.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/ARCHITECTURE_AND_COMPONENTS.md) - Update architecture documentation if needed
+- [ROADMAP_AND_PROGRESS.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/ROADMAP_AND_PROGRESS.md) - Update progress tracking
+
+## 🎓 Learning Objectives
+
+### Concepts to Understand
+- Key Laravel features used
+- Design patterns implemented
+- Best practices demonstrated
+
+### Skills Developed
+- Specific Laravel development skills
+- Architecture understanding
+- Testing practices
+
+This template ensures a consistent, learning-focused approach to each module or feature implementation.
