@@ -1,0 +1,371 @@
+# Git Commands Guide for Laravel Boilerplate Project
+
+This guide provides step-by-step instructions for Git operations in your Laravel boilerplate project, including configuration for multiple GitHub accounts.
+
+## Table of Contents
+1. [Initial Git Configuration](#initial-git-configuration)
+2. [Project Initialization](#project-initialization)
+3. [Working with Remotes](#working-with-remotes)
+4. [Basic Git Workflow](#basic-git-workflow)
+5. [Branch Management](#branch-management)
+6. [Commit Management](#commit-management)
+7. [Merging and Conflict Resolution](#merging-and-conflict-resolution)
+8. [Working with Multiple GitHub Accounts](#working-with-multiple-github-accounts)
+9. [Cleanup and Maintenance](#cleanup-and-maintenance)
+
+## Initial Git Configuration
+
+Configure your Git user information:
+
+```bash
+# Set global user name and email
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# Set default editor (optional)
+git config --global core.editor "code -w"
+
+# Set default branch name (optional)
+git config --global init.defaultBranch main
+
+# List all configurations
+git config --list
+```
+
+For project-specific configuration (run inside project directory):
+
+```bash
+# Set project-specific user name and email for your primary account
+git config user.name "yonasayfu"
+git config user.email "yonasayfu28@gmail.com"
+```
+
+## Project Initialization
+
+Initialize a new Git repository:
+
+```bash
+# Navigate to your project directory
+cd /Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate
+
+# Initialize Git repository (if not already done)
+git init
+
+# Check status
+git status
+```
+
+## Working with Remotes
+
+Add remotes for your multiple GitHub accounts:
+
+```bash
+# Add the primary remote (yonasayfu account) - SEMERA REPO
+git remote add origin https://github.com/yonasayfu/MyLaravelBoilerPlate.git
+
+# Add additional remotes for collaboration
+git remote add yonasayfu-alt https://github.com/yonasayfu/MyLaravelBoilerPlate.git
+git remote add elefensh-yona https://github.com/Elefensh-Yona/MyLaravelBoilerPlate.git
+git remote add guangut https://github.com/guangutsemera/MyLaravelBoilerPlate.git
+
+# List all remotes
+git remote -v
+
+# Rename a remote
+git remote rename old-name new-name
+
+# Remove a remote
+git remote remove remote-name
+
+# Update remote URL
+git remote set-url origin https://github.com/yonasayfu/MyLaravelBoilerPlate.git
+```
+
+## Basic Git Workflow
+
+Daily workflow commands:
+
+```bash
+# Check status
+git status
+
+# Add files to staging
+git add filename.txt          # Add specific file
+git add .                     # Add all changes
+git add *.php                 # Add all PHP files
+git add folder/               # Add all files in folder
+
+# Commit changes
+git commit -m "Descriptive commit message"
+
+# Push to remote
+git push origin main          # Push to main branch
+git push origin branch-name   # Push to specific branch
+
+# Pull changes
+git pull origin main          # Pull from main branch
+git pull origin branch-name   # Pull from specific branch
+
+# View commit history
+git log
+git log --oneline
+git log --graph --oneline --all
+```
+
+## Branch Management
+
+Create and manage branches:
+
+```bash
+# List branches
+git branch                    # List local branches
+git branch -r                 # List remote branches
+git branch -a                 # List all branches
+
+# Create a new branch
+git branch feature/new-module
+
+# Switch to a branch
+git checkout feature/new-module
+
+# Create and switch to a new branch (in one command)
+git checkout -b feature/new-module
+
+# With newer Git versions:
+git switch feature/new-module
+git switch -c feature/new-module
+
+# Push a new branch to remote
+git push -u origin feature/new-module
+
+# Delete a branch
+git branch -d feature/new-module      # Delete local branch
+git push origin --delete feature/new-module  # Delete remote branch
+```
+
+## Commit Management
+
+Manage commits and history:
+
+```bash
+# View commit history
+git log
+git log --oneline
+git log --graph --oneline --all
+
+# View specific commits
+git show commit-hash
+git show HEAD~1              # Show previous commit
+
+# Amend last commit
+git commit --amend -m "Updated commit message"
+
+# Reset commits
+git reset --soft HEAD~1      # Undo last commit, keep changes staged
+git reset --mixed HEAD~1     # Undo last commit, unstage changes
+git reset --hard HEAD~1      # Undo last commit, discard changes
+
+# Revert a commit (create new commit that undoes changes)
+git revert commit-hash
+```
+
+## Merging and Conflict Resolution
+
+Merge branches and resolve conflicts:
+
+```bash
+# Merge a branch into current branch
+git merge feature/new-module
+
+# Merge with no fast-forward (preserves branch structure)
+git merge --no-ff feature/new-module
+
+# Abort a merge in progress
+git merge --abort
+
+# Resolve conflicts manually, then:
+git add resolved-file.txt
+git commit -m "Resolve merge conflicts"
+```
+
+## Working with Multiple GitHub Accounts
+
+Configure SSH keys for multiple accounts (recommended approach):
+
+1. Generate SSH keys for each account:
+```bash
+# Generate key for yonasayfu account (primary)
+ssh-keygen -t rsa -b 4096 -C "yonasayfu28@gmail.com" -f ~/.ssh/id_rsa_yonasayfu
+
+# Generate key for Elefensh-Yona account
+ssh-keygen -t rsa -b 4096 -C "elefenshyona@gmail.com" -f ~/.ssh/id_rsa_elefensh
+
+# Generate key for Guangutsemera account
+ssh-keygen -t rsa -b 4096 -C "guangutsemera@gmail.com" -f ~/.ssh/id_rsa_guangut
+```
+
+2. Add keys to SSH agent:
+```bash
+ssh-add ~/.ssh/id_rsa_yonasayfu
+ssh-add ~/.ssh/id_rsa_elefensh
+ssh-add ~/.ssh/id_rsa_guangut
+```
+
+3. Create/edit SSH config file:
+```bash
+nano ~/.ssh/config
+```
+
+Add the following content:
+```
+# yonasayfu account (primary) - SEMERA
+Host github-yonasayfu
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_yonasayfu
+
+# Elefensh-Yona account
+Host github-elefensh
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_elefensh
+
+# Guangutsemera account
+Host github-guangut
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_guangut
+```
+
+4. Update remote URLs to use SSH hosts:
+```bash
+# Change HTTPS remotes to SSH with custom hosts
+git remote set-url origin git@github-yonasayfu:yonasayfu/MyLaravelBoilerPlate.git
+git remote set-url elefensh-yona git@github-elefensh:Elefensh-Yona/MyLaravelBoilerPlate.git
+git remote set-url guangut git@github-guangut:guangutsemera/MyLaravelBoilerPlate.git
+```
+
+Alternative approach using HTTPS with credentials:
+
+```bash
+# Configure Git credentials helper
+git config --global credential.helper store
+
+# For each repository, Git will prompt for credentials and store them
+git push origin main
+# Enter username and personal access token when prompted
+```
+
+## Cleanup and Maintenance
+
+Clean up and maintain your repository:
+
+```bash
+# Remove untracked files
+git clean -n             # Dry run (see what would be removed)
+git clean -f             # Remove untracked files
+git clean -fd            # Remove untracked files and directories
+
+# Unstage files
+git reset HEAD filename.txt     # Unstage specific file
+git reset HEAD .                # Unstage all files
+
+# Discard changes in working directory
+git checkout -- filename.txt    # Discard changes in specific file
+git checkout -- .               # Discard all changes
+
+# Garbage collection
+git gc                          # Clean up unnecessary files and optimize local repository
+
+# Prune remote-tracking branches
+git remote prune origin         # Remove deleted remote branches from local
+```
+
+## Best Practices for This Project
+
+1. **Branch Naming Convention**:
+   - Features: `feature/module-name`
+   - Bug fixes: `fix/issue-description`
+   - Releases: `release/version-number`
+
+2. **Commit Message Guidelines**:
+   - Use present tense ("Add feature" not "Added feature")
+   - Capitalize first letter
+   - Limit first line to 50 characters
+   - Use body for detailed explanations when needed
+
+3. **Workflow for New Modules**:
+   ```bash
+   # 1. Create new branch for module
+   git checkout -b feature/user-management
+   
+   # 2. Work on module (frequent commits)
+   git add .
+   git commit -m "Add user model and migration"
+   
+   # 3. Push branch to remote
+   git push -u origin feature/user-management
+   
+   # 4. After 10 code changes, commit
+   git add .
+   git commit -m "Implement user CRUD operations"
+   git push origin feature/user-management
+   
+   # 5. When module is complete, merge to main
+   git checkout main
+   git pull origin main
+   git merge feature/user-management
+   git push origin main
+   
+   # 6. Delete feature branch
+   git branch -d feature/user-management
+   git push origin --delete feature/user-management
+   ```
+
+4. **Collaboration Workflow**:
+   - Always pull latest changes before starting work
+   - Create feature branches for all new work
+   - Push feature branches regularly for backup
+   - Create pull requests for code review before merging
+   - Delete merged branches to keep repository clean
+
+5. **Specific Commands for Your Setup**:
+   ```bash
+   # Initialize repository (if needed)
+   git init
+   
+   # Configure user info
+   git config user.name "yonasayfu"
+   git config user.email "yonasayfu28@gmail.com"
+   
+   # Add primary remote (SEAMERA)
+   git remote add origin https://github.com/yonasayfu/MyLaravelBoilerPlate.git
+   
+   # Add collaboration remotes
+   git remote add elefensh-yona https://github.com/Elefensh-Yona/MyLaravelBoilerPlate.git
+   git remote add guangut https://github.com/guangutsemera/MyLaravelBoilerPlate.git
+   
+   # Verify remotes
+   git remote -v
+   
+   # Stage and commit initial files
+   git add .
+   git commit -m "Initial commit: Laravel Boilerplate setup"
+   
+   # Push to primary repository
+   git push -u origin main
+   
+   # Create feature branch for new work
+   git checkout -b feature/staff-management
+   
+   # Work on feature...
+   
+   # Commit changes (every 10 changes)
+   git add .
+   git commit -m "Implement staff model and controller"
+   
+   # Push feature branch
+   git push -u origin feature/staff-management
+   ```
+
+This guide should help you efficiently manage your Laravel boilerplate project with Git across multiple GitHub accounts.

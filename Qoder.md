@@ -74,15 +74,22 @@ Explain what this module does and why it's needed.
    - Factories for testing
    - Seeders for sample data
 
-6. **Testing**
+6. **MCP Tools (if applicable)**
+   - Custom MCP tools for the new module
+   - Integration with existing MCP framework
+   - Documentation of new tools
+
+7. **Testing**
    - Feature tests
    - Unit tests for services
    - API tests
+   - MCP integration tests
 
 #### Benefits
 - What this module adds to the boilerplate
 - Performance improvements
 - User experience enhancements
+- MCP tool enhancements
 
 ## 🚀 For Each File Creation
 
@@ -114,6 +121,7 @@ Explain the specific purpose of this file.
 - Specific functionality
 - Edge cases
 - Integration points
+- MCP tool compatibility
 
 #### Test Structure
 ``php
@@ -129,29 +137,34 @@ Explain the specific purpose of this file.
    - For each new service, create a unit test
    - For each new model, create a model test
    - For each new DTO, create a unit test
+   - For each new MCP tool, create integration tests
 
 2. **Test File Naming Convention**
    - Controllers: `tests/Feature/[ModuleName]Test.php`
    - Services: `tests/Unit/Services/[ServiceName]Test.php`
    - Models: `tests/Unit/Models/[ModelName]Test.php`
    - DTOs: `tests/Unit/DTOs/[DtoName]Test.php`
+   - MCP Tools: `tests/Feature/MCP/[ToolName]Test.php`
 
 3. **Example Test Creation Flow**
    - When creating `app/Models/Staff.php`, immediately create `tests/Unit/Models/StaffTest.php`
    - When creating `app/Http/Controllers/Admin/StaffController.php`, immediately create `tests/Feature/StaffTest.php`
    - When creating `app/Services/StaffService.php`, immediately create `tests/Unit/Services/StaffServiceTest.php`
+   - When creating MCP tools, immediately create `tests/Feature/MCP/StaffMcpToolTest.php`
 
 4. **Test Coverage Requirements**
    - Each public method should have at least one test
    - Test both success and failure scenarios
    - Test validation rules
    - Test edge cases and boundary conditions
+   - Test MCP tool integration and responses
 
 5. **PestPHP Testing Patterns**
    - Use `it()` for individual test cases
    - Use `describe()` to group related tests
    - Use `beforeEach()` for test setup
    - Use appropriate assertions for the data type
+   - Include MCP integration tests for new tools
 
 ### Example Test Structure for Controllers
 
@@ -295,6 +308,11 @@ it('throws validation exception for invalid data', function () {
      ```bash
      ./vendor/bin/pint
      ```
+   - Run Laravel Boost analysis:
+     ```bash
+     php artisan boost:mcp
+     ```
+   - Use MCP tools to verify architecture compliance
    - Update documentation in [PHASE_TRACKING.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/PHASE_TRACKING.md)
 
 6. **Push and Create Pull Request**
@@ -316,6 +334,7 @@ it('throws validation exception for invalid data', function () {
 - **Branch Naming**: Use `feature/`, `bugfix/`, `hotfix/` prefixes
 - **Testing**: Always include tests with feature implementations
 - **Documentation**: Update tracking documents after implementation
+- **MCP Integration**: Run Laravel Boost and MCP analysis after major implementations
 
 ## 🎓 Learning Objectives
 
@@ -330,10 +349,49 @@ it('throws validation exception for invalid data', function () {
 - Testing practices
 - Git workflow and version control
 
+## 🚀 Laravel Boost and MCP Integration Guidelines
+
+### For Each New Module Implementation
+
+1. **Run Laravel Boost Analysis**
+   - After implementing each major component, run Laravel Boost to analyze the code:
+     ```bash
+     php artisan boost:mcp
+     ```
+   - Use the MCP tools to check architecture compliance and get suggestions
+
+2. **MCP Tool Usage**
+   - Use the following built-in Laravel Boost tools:
+     - Database schema analysis
+     - Laravel documentation search
+     - Code execution with Tinker
+   - Use your custom MCP tools:
+     - `analyze_boilerplate_architecture` - Check Clean Architecture compliance
+     - `list_boilerplate_models` - List all Eloquent models
+     - `check_database_tables` - Inspect database schema
+     - `get_boilerplate_statistics` - Get project statistics
+
+3. **AI Assistant Integration**
+   - Connect your AI assistant (Claude, Cursor, etc.) to the MCP server at `http://localhost:8090`
+   - Ask questions like:
+     - "What models are in this boilerplate?"
+     - "Analyze the architecture compliance"
+     - "Show me the database schema"
+     - "What Laravel version is this using?"
+
+4. **Performance Monitoring**
+   - After implementing performance-critical components, use MCP tools to analyze:
+     - Database query performance
+     - Memory usage
+     - Caching effectiveness
+     - Architecture compliance score
+
+5. **Documentation Updates**
+   - Update tracking documents after running MCP analysis
+   - Record any suggestions or improvements identified by MCP tools
+   - Document how the new module integrates with existing MCP tools
+
 This template ensures a consistent, learning-focused approach to each module or feature implementation.
-
-
-
 
 Generate in this exact order:
 

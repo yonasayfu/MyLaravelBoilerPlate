@@ -1,0 +1,56 @@
+{
+  "_inertia-twgTNadN.js": {
+    "file": "assets/inertia-twgTNadN.js",
+    "name": "inertia",
+    "imports": [
+      "_misc-DzdG_PA0.js",
+      "_utils-DpIj8wd6.js"
+    ]
+  },
+  "_misc-DzdG_PA0.js": {
+    "file": "assets/misc-DzdG_PA0.js",
+    "name": "misc"
+  },
+  "_ui-framework-DTzQUqrY.js": {
+    "file": "assets/ui-framework-DTzQUqrY.js",
+    "name": "ui-framework",
+    "imports": [
+      "_vue-core-CNobgdKB.js",
+      "_misc-DzdG_PA0.js"
+    ]
+  },
+  "_utils-DpIj8wd6.js": {
+    "file": "assets/utils-DpIj8wd6.js",
+    "name": "utils"
+  },
+  "_vue-core-CNobgdKB.js": {
+    "file": "assets/vue-core-CNobgdKB.js",
+    "name": "vue-core",
+    "imports": [
+      "_misc-DzdG_PA0.js",
+      "_ui-framework-DTzQUqrY.js",
+      "_inertia-twgTNadN.js"
+    ]
+  },
+  "_ziggy-DNsBA8TE.js": {
+    "file": "assets/ziggy-DNsBA8TE.js",
+    "name": "ziggy"
+  },
+  "resources/js/app.ts": {
+    "file": "assets/app-DGZv1GFD.js",
+    "name": "app",
+    "src": "resources/js/app.ts",
+    "isEntry": true,
+    "imports": [
+      "_vue-core-CNobgdKB.js",
+      "_misc-DzdG_PA0.js",
+      "_ziggy-DNsBA8TE.js",
+      "_ui-framework-DTzQUqrY.js",
+      "_inertia-twgTNadN.js",
+      "_utils-DpIj8wd6.js"
+    ],
+    "css": [
+      "assets/app-DFOV8Ols.css"
+    ]
+  }
+}
