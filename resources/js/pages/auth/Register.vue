@@ -63,7 +63,7 @@ const form = useForm({
 
             <div class="text-center text-sm text-muted-foreground">
                 Already have an account?
-                <TextLink :href="login().url" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
+                <TextLink :href="login()" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
             </div>
         </form>
     </AuthBase>

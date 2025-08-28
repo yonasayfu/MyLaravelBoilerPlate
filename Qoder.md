@@ -87,48 +87,6 @@ Explain what this module does and why it's needed.
    - API tests
    - MCP integration tests
 
-#### Benefits
-- What this module adds to the boilerplate
-- Performance improvements
-- User experience enhancements
-- MCP tool enhancements
-
-## 🚀 For Each File Creation
-
-### File: [File Path]
-
-#### Purpose
-Explain the specific purpose of this file.
-
-#### Integration
-- How it connects to other components
-- Dependencies and relationships
-- Usage patterns
-
-#### Code Structure
-```php
-// Basic structure and key methods
-```
-
-#### Best Practices Applied
-- Design patterns used
-- Security considerations
-- Performance optimizations
-
-## 🧪 Testing Approach
-
-### Test File: [Test File Path]
-
-#### What to Test
-- Specific functionality
-- Edge cases
-- Integration points
-- MCP tool compatibility
-
-#### Test Structure
-```php
-// Example test structure
-```
 
 ## 🧪 Mandatory Testing Requirements
 
@@ -153,13 +111,6 @@ Explain the specific purpose of this file.
    - When creating `app/Http/Controllers/Admin/StaffController.php`, immediately create `tests/Feature/StaffTest.php`
    - When creating `app/Services/StaffService.php`, immediately create `tests/Unit/Services/StaffServiceTest.php`
    - When creating MCP tools, immediately create `tests/Feature/MCP/StaffMcpToolTest.php`
-
-4. **Test Coverage Requirements**
-   - Each public method should have at least one test
-   - Test both success and failure scenarios
-   - Test validation rules
-   - Test edge cases and boundary conditions
-   - Test MCP tool integration and responses
 
 5. **PestPHP Testing Patterns**
    - Use `it()` for individual test cases
@@ -254,6 +205,9 @@ it('throws validation exception for invalid data', function () {
 - [ARCHITECTURE_AND_COMPONENTS.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/ARCHITECTURE_AND_COMPONENTS.md) - Update architecture documentation if needed
 - [ROADMAP_AND_PROGRESS.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/ROADMAP_AND_PROGRESS.md) - Update progress tracking
 
+
+
+
 ## 🌿 Git Workflow Guidelines
 
 ### For Each New Module Implementation
@@ -338,19 +292,6 @@ it('throws validation exception for invalid data', function () {
 - **Documentation**: Update tracking documents after implementation
 - **MCP Integration**: Run Laravel Boost and MCP analysis after major implementations
 
-## 🎓 Learning Objectives
-
-### Concepts to Understand
-- Key Laravel features used
-- Design patterns implemented
-- Best practices demonstrated
-
-### Skills Developed
-- Specific Laravel development skills
-- Architecture understanding
-- Testing practices
-- Git workflow and version control
-
 ## 🚀 Laravel Boost and MCP Integration Guidelines
 
 ### For Each New Module Implementation
@@ -373,14 +314,6 @@ it('throws validation exception for invalid data', function () {
      - `check_database_tables` - Inspect database schema
      - `get_boilerplate_statistics` - Get project statistics
 
-3. **AI Assistant Integration**
-   - Connect your AI assistant (Claude, Cursor, etc.) to the MCP server at `http://localhost:8090`
-   - Ask questions like:
-     - "What models are in this boilerplate?"
-     - "Analyze the architecture compliance"
-     - "Show me the database schema"
-     - "What Laravel version is this using?"
-
 4. **Performance Monitoring**
    - After implementing performance-critical components, use MCP tools to analyze:
      - Database query performance
@@ -393,9 +326,7 @@ it('throws validation exception for invalid data', function () {
    - Record any suggestions or improvements identified by MCP tools
    - Document how the new module integrates with existing MCP tools
 
-This template ensures a consistent, learning-focused approach to each module or feature implementation.
-
-Generate in this exact order:
+### Generate in this exact order:
 
 1. **Migration:** 
    - Table name: [table_name]
