@@ -1,5 +1,7 @@
 import '../css/app.css';
 
+declare var route: any; // Temporarily declare route globally for debugging
+
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
@@ -11,12 +13,15 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
-    resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue', { eager: true })),
+    resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
             .mount(el);
+
+        console.log('Ziggy route function:', route);
+        console.log('Dashboard route:', route('dashboard'));
     },
     progress: {
         color: '#4B5563',

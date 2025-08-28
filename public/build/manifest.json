@@ -1,35 +1,36 @@
 {
-  "_inertia-twgTNadN.js": {
-    "file": "assets/inertia-twgTNadN.js",
+  "_inertia-Cxt9ixn0.js": {
+    "file": "assets/inertia-Cxt9ixn0.js",
     "name": "inertia",
     "imports": [
-      "_misc-DzdG_PA0.js",
+      "_misc-DozKSLuY.js",
       "_utils-DpIj8wd6.js"
     ]
   },
-  "_misc-DzdG_PA0.js": {
-    "file": "assets/misc-DzdG_PA0.js",
+  "_misc-DozKSLuY.js": {
+    "file": "assets/misc-DozKSLuY.js",
     "name": "misc"
   },
-  "_ui-framework-DTzQUqrY.js": {
-    "file": "assets/ui-framework-DTzQUqrY.js",
+  "_ui-framework-kEGVVHuw.js": {
+    "file": "assets/ui-framework-kEGVVHuw.js",
     "name": "ui-framework",
     "imports": [
-      "_vue-core-CNobgdKB.js",
-      "_misc-DzdG_PA0.js"
+      "_vue-core-BRGx-3Sq.js",
+      "_misc-DozKSLuY.js"
     ]
   },
   "_utils-DpIj8wd6.js": {
     "file": "assets/utils-DpIj8wd6.js",
     "name": "utils"
   },
-  "_vue-core-CNobgdKB.js": {
-    "file": "assets/vue-core-CNobgdKB.js",
+  "_vue-core-BRGx-3Sq.js": {
+    "file": "assets/vue-core-BRGx-3Sq.js",
     "name": "vue-core",
+    "isDynamicEntry": true,
     "imports": [
-      "_misc-DzdG_PA0.js",
-      "_ui-framework-DTzQUqrY.js",
-      "_inertia-twgTNadN.js"
+      "_misc-DozKSLuY.js",
+      "_ui-framework-kEGVVHuw.js",
+      "_inertia-Cxt9ixn0.js"
     ]
   },
   "_ziggy-DNsBA8TE.js": {
@@ -37,20 +38,33 @@
     "name": "ziggy"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-DGZv1GFD.js",
+    "file": "assets/app-UKk4yCsz.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vue-core-CNobgdKB.js",
-      "_misc-DzdG_PA0.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_misc-DozKSLuY.js",
       "_ziggy-DNsBA8TE.js",
-      "_ui-framework-DTzQUqrY.js",
-      "_inertia-twgTNadN.js",
+      "_ui-framework-kEGVVHuw.js",
+      "_inertia-Cxt9ixn0.js",
       "_utils-DpIj8wd6.js"
     ],
+    "dynamicImports": [
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js",
+      "_vue-core-BRGx-3Sq.js"
+    ],
     "css": [
-      "assets/app-DFOV8Ols.css"
+      "assets/app-CMDaDI5o.css"
     ]
   }
 }

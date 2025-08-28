@@ -10,6 +10,8 @@ Before implementing any new module or feature, refer to these essential document
 2. **[ROADMAP_AND_PROGRESS.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/ROADMAP_AND_PROGRESS.md)** - Implementation roadmap and current progress tracking
 3. **[ARCHITECTURE_AND_COMPONENTS.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/ARCHITECTURE_AND_COMPONENTS.md)** - Architecture patterns, components, and data flow
 4. **[PHASE_TRACKING.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/PHASE_TRACKING.md)** - Tracking of files created in each phase
+5. **[AUTHENTICATION_FEATURES_GUIDE.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/AUTHENTICATION_FEATURES_GUIDE.md)** - Comprehensive guide for using authentication features
+6. **[EMAIL_TESTING_GUIDE.md](file:///Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate/EMAIL_TESTING_GUIDE.md)** - Guide for testing email features with real email addresses
 
 These documents provide the foundation for all implementation decisions and should be referenced to maintain consistency.
 
@@ -104,7 +106,7 @@ Explain the specific purpose of this file.
 - Usage patterns
 
 #### Code Structure
-``php
+```php
 // Basic structure and key methods
 ```
 
@@ -124,7 +126,7 @@ Explain the specific purpose of this file.
 - MCP tool compatibility
 
 #### Test Structure
-``php
+```php
 // Example test structure
 ```
 
@@ -168,7 +170,7 @@ Explain the specific purpose of this file.
 
 ### Example Test Structure for Controllers
 
-``php
+```php
 <?php
 
 use Tests\TestCase;
@@ -206,7 +208,7 @@ it('can create a new staff member', function () {
 
 ### Example Test Structure for Services
 
-``php
+```php
 <?php
 
 use Tests\TestCase;

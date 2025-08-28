@@ -10,7 +10,6 @@ class TestController extends OptimizedBaseController
     /**
      * Test the base controller functionality
      *
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
@@ -39,7 +38,7 @@ class TestController extends OptimizedBaseController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function error()
+    public function error(string $message = 'An error occurred', int $code = 400, array $errors = [])
     {
         return $this->error('This is a test error', 400, [
             'test_error' => 'This is a test error detail',
