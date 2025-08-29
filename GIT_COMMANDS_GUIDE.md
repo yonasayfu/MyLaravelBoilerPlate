@@ -2,6 +2,8 @@
 
 This guide provides step-by-step instructions for Git operations in your Laravel boilerplate project, including configuration for multiple GitHub accounts.
 
+**See also**: [GIT_WORKFLOW.md](GIT_WORKFLOW.md) for detailed workflow guidelines and best practices.
+
 ## Table of Contents
 1. [Initial Git Configuration](#initial-git-configuration)
 2. [Project Initialization](#project-initialization)
