@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { login } from '@/routes';
-import { request } from '@/routes/password';
+import { email } from '@/routes/password';
 import { Form, Head, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 
@@ -17,6 +17,12 @@ defineProps<{
 const form = useForm({
     email: '',
 });
+
+const submit = () => {
+    form.post(email(), {
+        onFinish: () => form.reset(),
+    });
+};
 </script>
 
 <template>
@@ -28,7 +34,8 @@ const form = useForm({
         </div>
 
         <div class="space-y-6">
-            <form @submit.prevent="form.post(request())" class="space-y-6">
+            <form @submit.prevent="submit" class="space-y-6">
+                <input type="hidden" name="_token" :value="$page.props.csrf_token">
                 <div class="grid gap-2">
                     <Label for="email">Email address</Label>
                     <Input id="email" v-model="form.email" type="email" autocomplete="off" autofocus placeholder="email@example.com" />

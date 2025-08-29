@@ -7,6 +7,10 @@ export function request() {
     return route('password.request');
 }
 
+export function email() {
+    return route('password.email');
+}
+
 export function store() {
     return route('password.store');
 }

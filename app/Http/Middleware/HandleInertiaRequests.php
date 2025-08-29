@@ -45,7 +45,7 @@ class HandleInertiaRequests extends Middleware
             $pinned = Quote::query()
                 ->where('user_id', $user->id)
                 ->where('pinned', true)
-                ->first(['id','text','author','image_path']);
+                ->first(['id', 'text', 'author', 'image_path']);
 
             if ($pinned) {
                 $author = $pinned->author ?: null;
@@ -59,7 +59,7 @@ class HandleInertiaRequests extends Middleware
                     ->where('user_id', $user->id)
                     ->orderByRaw('COALESCE(priority, 999999) asc')
                     ->latest()
-                    ->get(['id','text','author','image_path']);
+                    ->get(['id', 'text', 'author', 'image_path']);
                 if ($userQuotes->isNotEmpty()) {
                     $picked = $userQuotes->random();
                     $sharedQuote = [
@@ -71,12 +71,12 @@ class HandleInertiaRequests extends Middleware
             }
         }
 
-        if (! $sharedQuote) {
+        if (!$sharedQuote) {
             // Use any quote from the database (global) first
             $any = Quote::query()
                 ->orderByRaw('COALESCE(priority, 999999) asc')
                 ->inRandomOrder()
-                ->first(['id','text','author','image_path']);
+                ->first(['id', 'text', 'author', 'image_path']);
 
             if ($any) {
                 $sharedQuote = [
@@ -92,13 +92,14 @@ class HandleInertiaRequests extends Middleware
         }
 
         return [
-            ...parent::share($request),
+             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => $sharedQuote,
             'auth' => [
                 'user' => $request->user(),
             ],
-            'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'sidebarOpen' => !$request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'csrf_token' => csrf_token(),
         ];
     }
 }

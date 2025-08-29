@@ -22,8 +22,43 @@ const page = usePage<AppPageProps<{ quotes: QuoteItem[]; trashed: QuoteItem[] }>
 const quotes = ref([...page.props.quotes])
 const trashed = ref([...page.props.trashed])
 
-const form = useForm<{ text: string; author: string; language: string; priority: number | ''; image: File | null }>({ text: '', author: '', language: '', priority: '' as unknown as number | '', image: null })
+// Form for creating new quotes
+const form = useForm<{ 
+  text: string; 
+  author: string; 
+  language: string; 
+  priority: number | ''; 
+  image: File | null 
+}>({ 
+  text: '', 
+  author: '', 
+  language: '', 
+  priority: '' as unknown as number | '', 
+  image: null 
+})
+
+// Form for editing existing quotes
+const editForm = useForm<{ 
+  id: number | null;
+  text: string; 
+  author: string; 
+  language: string; 
+  priority: number | ''; 
+  image: File | null;
+  _method?: string;
+}>({ 
+  id: null,
+  text: '', 
+  author: '', 
+  language: '', 
+  priority: '' as unknown as number | '', 
+  image: null,
+  _method: 'PUT'
+})
+
 const imageInputRef = ref<HTMLInputElement | null>(null)
+const editImageInputRef = ref<HTMLInputElement | null>(null)
+const editingId = ref<number | null>(null)
 
 function onCreateImageChange(e: Event) {
   const t = e.target as HTMLInputElement
@@ -98,12 +133,88 @@ function restore(id: number) {
   useForm({}).post(quotesRestore(id), { preserveScroll: true })
 }
 
-function onUpdateImageChange(id: number, e: Event) {
+function startEdit(quote: QuoteItem) {
+  editingId.value = quote.id
+  editForm.reset()
+  editForm.defaults({
+    id: quote.id,
+    text: quote.text,
+    author: quote.author || '',
+    language: quote.language || '',
+    priority: quote.priority ?? '',
+    image: null,
+    _method: 'PUT'
+  }).reset()
+}
+
+function cancelEdit() {
+  editingId.value = null
+  editForm.reset()
+  if (editImageInputRef.value) {
+    editImageInputRef.value.value = ''
+  }
+}
+
+function updateQuote() {
+  if (!editingId.value) return
+  
+  // Create FormData to properly handle file uploads
+  const formData = new FormData()
+  formData.append('_method', 'PUT')
+  formData.append('text', editForm.text)
+  formData.append('author', editForm.author)
+  formData.append('language', editForm.language)
+  formData.append('priority', editForm.priority?.toString() || '')
+  
+  // Only append the image if a new one was selected
+  if (editForm.image) {
+    formData.append('image', editForm.image)
+  }
+  
+  // Use a new form instance to avoid type issues
+  useForm(formData, {
+    forceFormData: true,
+  }).post(quotesUpdate(editingId.value), {
+    preserveScroll: true,
+    onSuccess: () => {
+      editingId.value = null
+      editForm.reset()
+      if (editImageInputRef.value) {
+        editImageInputRef.value.value = ''
+      }
+    },
+    onError: (errors) => {
+      console.error('Error updating quote:', errors)
+    }
+  })
+}
+
+function onUpdateImageChange(e: Event) {
   const t = e.target as HTMLInputElement
   const f = t.files && t.files[0]
   if (!f) return
-  const formImg = useForm<{ image: File | null }>({ image: f })
-  formImg.post(quotesUpdate(id), { preserveScroll: true, forceFormData: true, onFinish: () => { t.value = '' } })
+  editForm.image = f
+}
+
+function onEditImageChange(e: Event) {
+  const input = e.target as HTMLInputElement
+  if (!input.files || !input.files[0]) return
+  
+  const file = input.files[0]
+  if (!file.type.startsWith('image/')) {
+    alert('Please select an image file')
+    return
+  }
+  
+  // Update the form with the new file
+  editForm.image = file
+  
+  // Show a preview of the selected image
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    // This is just for preview - the actual upload happens on form submission
+  }
+  reader.readAsDataURL(file)
 }
 </script>
 
@@ -151,25 +262,117 @@ function onUpdateImageChange(id: number, e: Event) {
           <ul v-else class="divide-y rounded-lg border">
             <li v-for="q in quotes" :key="q.id" class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
               <div class="flex-1">
-                <p class="font-medium" :class="{ 'italic': q.pinned }">{{ q.text }}</p>
-                <p class="text-xs text-muted-foreground">
-                  <span v-if="q.pinned" class="mr-2">Pinned</span>
-                  <span v-if="q.author" class="mr-2">Author: {{ q.author }}</span>
-                  <span v-if="q.language">Lang: {{ q.language }}</span>
-                </p>
+                <div v-if="editingId !== q.id">
+                  <p class="font-medium" :class="{ 'italic': q.pinned }">{{ q.text }}</p>
+                  <p class="text-xs text-muted-foreground">
+                    <span v-if="q.pinned" class="mr-2">Pinned</span>
+                    <span v-if="q.author" class="mr-2">Author: {{ q.author }}</span>
+                    <span v-if="q.language">Lang: {{ q.language }}</span>
+                  </p>
+                </div>
+                <div v-else class="space-y-2 w-full">
+                  <Input v-model="editForm.text" class="w-full" required />
+                  <div class="grid grid-cols-2 gap-2">
+                    <div>
+                      <Label for="edit-author" class="text-xs">Author</Label>
+                      <Input id="edit-author" v-model="editForm.author" class="w-full text-xs h-8" />
+                    </div>
+                    <div>
+                      <Label for="edit-language" class="text-xs">Language</Label>
+                      <Input id="edit-language" v-model="editForm.language" class="w-full text-xs h-8" />
+                    </div>
+                    <div>
+                      <Label for="edit-priority" class="text-xs">Priority</Label>
+                      <Input 
+                        id="edit-priority" 
+                        type="number" 
+                        v-model.number="editForm.priority" 
+                        class="w-full text-xs h-8"
+                        min="0"
+                      />
+                    </div>
+                    <div>
+                      <Label for="edit-image" class="text-xs block">Change Image</Label>
+                      <div class="flex items-center gap-2">
+                        <Input 
+                          id="edit-image" 
+                          type="file" 
+                          accept="image/*" 
+                          class="hidden" 
+                          ref="editImageInputRef"
+                          @change="onEditImageChange"
+                        />
+                        <Button 
+                          type="button" 
+                          variant="outline" 
+                          size="sm" 
+                          class="h-8 text-xs flex-1"
+                          @click="() => editImageInputRef?.click()"
+                        >
+                          {{ editForm.image ? 'Change Image' : 'Select New Image' }}
+                        </Button>
+                      </div>
+                      <div v-if="editForm.image" class="mt-1 text-xs text-green-600">
+                        New image selected
+                      </div>
+                      <div v-else-if="q.image_url" class="mt-1">
+                        <div class="text-xs text-gray-500">Current image:</div>
+                        <img 
+                          :src="q.image_url" 
+                          class="mt-1 h-16 w-16 object-cover rounded border"
+                          :alt="'Image for quote: ' + q.text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="flex items-center gap-2 sm:w-80">
-                <Input type="number" class="w-28" :value="q.priority ?? ''" placeholder="Priority" @change="(e: any) => updatePriority(q.id, e.target.value ? Number(e.target.value) : null)" />
-                <Button
-                  type="button"
-                  :variant="q.pinned ? 'default' : 'outline'"
-                  class="p-2 h-9 w-9 flex items-center justify-center"
-                  :title="q.pinned ? 'Unpin this quote' : 'Pin this quote'"
-                  @click="() => pin(q)"
-                >
-                  <Pin :class="['h-4 w-4', { 'fill-current': q.pinned }]" />
-                </Button>
-                <Button variant="ghost" @click="remove(q.id)" class="text-red-600 hover:text-red-700">Delete</Button>
+                <template v-if="editingId !== q.id">
+                  <Button 
+                    type="button" 
+                    variant="ghost" 
+                    size="sm" 
+                    @click="startEdit(q)"
+                    class="text-blue-600 hover:text-blue-700"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    type="button"
+                    :variant="q.pinned ? 'default' : 'outline'"
+                    class="p-2 h-9 w-9 flex items-center justify-center"
+                    :title="q.pinned ? 'Unpin this quote' : 'Pin this quote'"
+                    @click="() => pin(q)"
+                  >
+                    <Pin :class="['h-4 w-4', { 'fill-current': q.pinned }]" />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    @click="remove(q.id)" 
+                    class="text-red-600 hover:text-red-700"
+                  >
+                    Delete
+                  </Button>
+                </template>
+                <template v-else>
+                  <Button 
+                    type="button" 
+                    @click="updateQuote" 
+                    :disabled="editForm.processing"
+                    class="bg-green-600 hover:bg-green-700 text-white"
+                  >
+                    Save
+                  </Button>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    @click="cancelEdit"
+                    :disabled="editForm.processing"
+                  >
+                    Cancel
+                  </Button>
+                </template>
               </div>
             </li>
           </ul>
