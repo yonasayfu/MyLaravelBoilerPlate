@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
+use App\Http\Controllers\Settings\QuoteController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,4 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::get('settings/appearance', function () {
         return Inertia::render('settings/Appearance');
     })->name('appearance');
+
+    // Quotes management
+    Route::get('settings/quotes', [QuoteController::class, 'index'])->name('quotes.index');
+    Route::post('settings/quotes', [QuoteController::class, 'store'])->name('quotes.store');
+    Route::patch('settings/quotes/{quote}', [QuoteController::class, 'update'])->name('quotes.update');
+    Route::delete('settings/quotes/{quote}', [QuoteController::class, 'destroy'])->name('quotes.destroy');
+    Route::post('settings/quotes/{id}/restore', [QuoteController::class, 'restore'])->name('quotes.restore');
 });

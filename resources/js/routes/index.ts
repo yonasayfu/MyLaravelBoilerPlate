@@ -29,3 +29,4 @@ export * from './profile';
 export * from './password';
 export * from './verification';
 export * from './appearance';
+export * from './quotes';
