@@ -92,3 +92,6 @@ test-email-functionality.php
 test-forgot-password-workflow.php
 test-password-reset.php
 test-routes.js
+
+# Separate projects
+mailcatcher/
