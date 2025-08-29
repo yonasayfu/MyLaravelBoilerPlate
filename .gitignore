@@ -52,6 +52,8 @@ Thumbs.db
 # Build artifacts
 *.min.js
 *.min.css
+/public/build/*
+*.log*
 
 # Laravel specific
 bootstrap/cache/*
@@ -71,3 +73,22 @@ yarn-error.log*
 # Testing
 .phpunit.result.cache
 .php_cs.cache
+
+# Test files
+*-test.html
+*-test.php
+*-test.js
+
+test-*.html
+test-*.php
+test-*.js
+
+# Documentation
+*-GUIDE.md
+
+# Command output files
+check-emails.php
+test-email-functionality.php
+test-forgot-password-workflow.php
+test-password-reset.php
+test-routes.js
