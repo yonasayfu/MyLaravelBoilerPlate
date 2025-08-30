@@ -2,19 +2,38 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\DTOs\CreateUserDTO;
+use App\Http\Controllers\BaseController;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class RegisteredUserController extends Controller
+class RegisteredUserController extends BaseController
 {
+    /**
+     * The user service instance.
+     *
+     * @var \App\Services\UserService
+     */
+    protected UserService $userService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param \App\Services\UserService $userService
+     * @return void
+     */
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Show the registration page.
      */
@@ -32,15 +51,21 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone_number' => 'nullable|string|regex:/^[\+]?[1-9][\d]{0,15}$/',
         ]);
 
-        $user = User::create([
+        // Create DTO with validated data
+        $dto = new CreateUserDTO([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
+            'phone_number' => $request->phone_number,
         ]);
+
+        // Use UserService to create the user via DTO
+        $user = $this->userService->createFromDTO($dto);
 
         event(new Registered($user));
 

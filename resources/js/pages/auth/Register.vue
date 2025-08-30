@@ -14,6 +14,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    phone_number: '',
 });
 </script>
 
@@ -36,8 +37,14 @@ const form = useForm({
                 </div>
 
                 <div class="grid gap-2">
+                    <Label for="phone_number">Phone Number</Label>
+                    <Input id="phone_number" v-model="form.phone_number" type="tel" :tabindex="3" autocomplete="tel" placeholder="+1234567890" />
+                    <InputError :message="form.errors.phone_number" />
+                </div>
+
+                <div class="grid gap-2">
                     <Label for="password">Password</Label>
-                    <Input id="password" v-model="form.password" type="password" required :tabindex="3" autocomplete="new-password" placeholder="Password" />
+                    <Input id="password" v-model="form.password" type="password" required :tabindex="4" autocomplete="new-password" placeholder="Password" />
                     <InputError :message="form.errors.password" />
                 </div>
 
@@ -48,14 +55,14 @@ const form = useForm({
                         v-model="form.password_confirmation"
                         type="password"
                         required
-                        :tabindex="4"
+                        :tabindex="5"
                         autocomplete="new-password"
                         placeholder="Confirm password"
                     />
                     <InputError :message="form.errors.password_confirmation" />
                 </div>
 
-                <Button type="submit" class="mt-2 w-full btn btn-glass-neutral" tabindex="5" :disabled="form.processing">
+                <Button type="submit" class="mt-2 w-full btn btn-glass-neutral" tabindex="6" :disabled="form.processing">
                     <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
                     Create account
                 </Button>
@@ -63,7 +70,7 @@ const form = useForm({
 
             <div class="text-center text-sm text-muted-foreground">
                 Already have an account?
-                <TextLink :href="login()" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
+                <TextLink :href="login()" class="underline underline-offset-4" :tabindex="7">Log in</TextLink>
             </div>
         </form>
     </AuthBase>
