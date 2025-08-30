@@ -470,3 +470,228 @@ git remote prune origin         # Remove deleted remote branches from local
    ```
 
 This guide should help you efficiently manage your Laravel boilerplate project with Git across multiple GitHub accounts.
+
+# 🌿 Git Commands Guide
+
+This guide documents the Git commands used in the Laravel Boilerplate project, following the conventions specified in Qoder.md.
+
+## 📋 Basic Git Workflow
+
+### 1. Check Current Status
+``bash
+git status
+```
+
+### 2. Add Files to Staging
+```bash
+# Add specific files
+git add app/Http/Controllers/Auth/*.php
+git add resources/js/pages/auth/Register.vue
+git add tests/Feature/Auth/RegistrationTest.php
+
+# Add all changes
+git add .
+```
+
+### 3. Commit Changes
+```bash
+# Commit with conventional commit message
+git commit -m "feat: enhance authentication controllers to use BaseController and integrate with UserService" -m "Extended all authentication controllers to use our custom BaseController for consistent error handling and messaging. Integrated registration flow with UserService and CreateUserDTO for proper password hashing. Added phone number field to registration form with validation." -m "Updated frontend registration form to include phone number field. Enhanced error handling in all authentication controllers. Fixed registration test to include phone number field."
+```
+
+### 4. Push Changes
+```bash
+# Push to remote repository
+git push origin git-workflow-improvements
+```
+
+## 🌿 Branch Management
+
+### 1. Create a New Feature Branch
+```bash
+git checkout -b feature/staff-management
+```
+
+### 2. Switch Between Branches
+```bash
+# Switch to main branch
+git checkout main
+
+# Switch to feature branch
+git checkout feature/staff-management
+```
+
+### 3. List All Branches
+```bash
+git branch
+```
+
+### 4. Delete a Branch
+```bash
+# Delete local branch
+git branch -d feature/staff-management
+
+# Delete remote branch
+git push origin --delete feature/staff-management
+```
+
+## 🔄 Synchronization
+
+### 1. Pull Latest Changes
+```bash
+# Pull from remote main branch
+git pull origin main
+```
+
+### 2. Fetch All Remote Branches
+```bash
+git fetch --all
+```
+
+## 🔍 History and Inspection
+
+### 1. View Commit History
+```bash
+# View commit history
+git log
+
+# View compact commit history
+git log --oneline
+
+# View commit history with file changes
+git log --stat
+```
+
+### 2. View Differences
+```bash
+# View unstaged changes
+git diff
+
+# View staged changes
+git diff --staged
+
+# View differences between branches
+git diff main feature/staff-management
+```
+
+## 🧹 Cleanup
+
+### 1. Discard Changes
+```bash
+# Discard changes in working directory
+git restore app/Http/Controllers/Auth/RegisteredUserController.php
+
+# Unstage a file
+git restore --staged app/Http/Controllers/Auth/RegisteredUserController.php
+```
+
+### 2. Reset Commits
+```bash
+# Reset to previous commit (keep changes)
+git reset HEAD~1
+
+# Reset to previous commit (discard changes)
+git reset --hard HEAD~1
+```
+
+## 🎯 GitHub Repository Management
+
+### 1. Remote Repository Setup
+```bash
+# Add remote repository (must be created manually on GitHub first)
+git remote add origin https://github.com/yonasayfu/MyLaravelBoilerPlate.git
+
+# Verify remote repository
+git remote -v
+```
+
+### 2. Push to New Remote Repository
+```bash
+# Push all branches to remote repository
+git push -u origin --all
+
+# Push all tags to remote repository
+git push -u origin --tags
+```
+
+## 📝 Conventional Commits Format
+
+We follow the conventional commits format for all commit messages:
+
+### Commit Types
+- `feat:` - A new feature
+- `fix:` - A bug fix
+- `docs:` - Documentation only changes
+- `style:` - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- `refactor:` - A code change that neither fixes a bug nor adds a feature
+- `perf:` - A code change that improves performance
+- `test:` - Adding missing tests or correcting existing tests
+- `build:` - Changes that affect the build system or external dependencies
+- `ci:` - Changes to our CI configuration files and scripts
+- `chore:` - Other changes that don't modify src or test files
+- `revert:` - Reverts a previous commit
+
+### Example Commit Messages
+```bash
+git commit -m "feat: add staff model with user relationship"
+git commit -m "fix: resolve validation issue in staff service"
+git commit -m "test: add unit tests for staff controller"
+git commit -m "docs: update architecture documentation"
+```
+
+## 📁 Multi-Account Git Configuration
+
+For developers managing multiple GitHub accounts:
+
+### 1. Configure SSH Keys
+```bash
+# Generate SSH key for each account
+ssh-keygen -t rsa -b 4096 -C "yonasayfu28@gmail.com"
+ssh-keygen -t rsa -b 4096 -C "elefenshyona@gmail.com"
+ssh-keygen -t rsa -b 4096 -C "guangutsemera@gmail.com"
+```
+
+### 2. Configure SSH Config
+Edit `~/.ssh/config`:
+```
+# yonasayfu account
+Host github-yonasayfu
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_yonasayfu
+
+# Elefensh-Yona account
+Host github-elefensh
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_elefensh
+
+# guangutsemera account
+Host github-guangutsemera
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_guangutsemera
+```
+
+### 3. Clone Repositories with Specific Accounts
+```bash
+# Clone using yonasayfu account
+git clone git@github-yonasayfu:yonasayfu/MyLaravelBoilerPlate.git
+
+# Clone using Elefensh-Yona account
+git clone git@github-elefensh:Elefensh-Yona/MyLaravelBoilerPlate.git
+```
+
+## ⚠️ Important Notes
+
+1. **GitHub Repository Creation**: Remote repositories on GitHub must be manually created before adding them as git remotes. The `git remote add` command does not create repositories automatically.
+
+2. **Branch Naming**: Use descriptive branch names with prefixes:
+   - `feature/` - for new features
+   - `bugfix/` - for bug fixes
+   - `hotfix/` - for urgent fixes
+   - `release/` - for releases
+
+3. **Commit Frequency**: Make at least one commit for every 10 code changes to maintain a clear history.
+
+4. **Documentation Updates**: Always update tracking documents (PHASE_TRACKING.md, ROADMAP_AND_PROGRESS.md) after implementing features.
