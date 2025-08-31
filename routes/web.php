@@ -1,19 +1,32 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Rbac\DashboardController as RbacDashboardController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', function () {
-    return redirect()->route('login');
-})->name('home');
+    return view('welcome');
+});
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-// Test routes for base class functionality
-Route::get('/test', [App\Http\Controllers\TestController::class, 'index'])->name('test.index');
-Route::get('/test/error', [App\Http\Controllers\TestController::class, 'error'])->name('test.error');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-require __DIR__ . '/settings.php';
+// RBAC Routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/rbac/dashboard', [RbacDashboardController::class, 'index'])
+        ->middleware('can:view-reports')
+        ->name('rbac.dashboard');
+    Route::get('/rbac/roles/{roleName}', [RbacDashboardController::class, 'showRole'])
+        ->middleware('can:view-roles')
+        ->name('rbac.roles.show');
+});
+
 require __DIR__ . '/auth.php';
