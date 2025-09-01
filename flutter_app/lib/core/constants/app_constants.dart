@@ -6,7 +6,11 @@ class AppConstants {
   static const String appBuildNumber = '1';
   
   // API Configuration
-  static const String baseUrl = 'http://localhost:8000';
+  // For localhost testing:
+  // iOS Simulator: 'http://127.0.0.1:8000'
+  // Android Emulator: 'http://10.0.2.2:8000'
+  // Physical Device: 'http://YOUR_LOCAL_IP:8000'
+  static const String baseUrl = 'http://127.0.0.1:8000';
   static const String apiVersion = 'v1';
   static const String apiBaseUrl = '$baseUrl/api/$apiVersion';
   
