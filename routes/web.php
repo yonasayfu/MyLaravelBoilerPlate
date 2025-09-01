@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -31,6 +31,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Enhanced RBAC Management Routes
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    // User Management
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::get('users/export', [\App\Http\Controllers\Admin\UserController::class, 'export'])
+        ->name('users.export');
+    Route::post('users/{user}/toggle-status', [\App\Http\Controllers\Admin\UserController::class, 'toggleStatus'])
+        ->name('users.toggle-status');
+
     // Role Management
     Route::resource('roles', \App\Http\Controllers\Admin\RoleController::class)
         ->middleware('can:manage-roles');
@@ -104,4 +111,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/notifications/preferences', [\App\Http\Controllers\NotificationController::class, 'updatePreferences'])->name('notifications.preferences');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

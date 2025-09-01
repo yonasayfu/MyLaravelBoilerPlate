@@ -14,9 +14,13 @@ import { Pin } from 'lucide-vue-next'
 
 interface QuoteItem { id: number; text: string; author?: string | null; language?: string | null; pinned: boolean; priority?: number | null; image_url?: string | null }
 
-const breadcrumbItems: BreadcrumbItem[] = [
-  { title: 'Quotes', href: quotesIndex().url },
-]
+const breadcrumbItems: BreadcrumbItem[] = (() => {
+  try {
+    return [{ title: 'Quotes', href: quotesIndex().url }];
+  } catch {
+    return [{ title: 'Quotes', href: '#' }];
+  }
+})();
 
 const page = usePage<AppPageProps<{ quotes: QuoteItem[]; trashed: QuoteItem[] }>>()
 const quotes = ref([...page.props.quotes])

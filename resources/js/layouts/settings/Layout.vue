@@ -8,24 +8,17 @@ import { edit } from '@/routes/profile';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 
-const sidebarNavItems: NavItem[] = [
-    {
-        title: 'Profile',
-        href: edit(),
-    },
-    {
-        title: 'Password',
-        href: editPassword(),
-    },
-    {
-        title: 'Appearance',
-        href: appearance(),
-    },
-    {
-        title: 'Quotes',
-        href: quotesIndex(),
-    },
-];
+const sidebarNavItems: NavItem[] = (() => {
+    const items: NavItem[] = [
+        { title: 'Profile', href: edit() },
+        { title: 'Password', href: editPassword() },
+        { title: 'Appearance', href: appearance() },
+    ];
+    try {
+        items.push({ title: 'Quotes', href: quotesIndex() });
+    } catch {}
+    return items;
+})();
 
 const currentPath = typeof window !== undefined ? window.location.pathname : '';
 </script>

@@ -57,7 +57,11 @@ class UserController extends OptimizedBaseController
     {
         $this->authorize('create', User::class);
 
-        return inertia('Admin/Users/Create');
+        $availableRoles = \Spatie\Permission\Models\Role::all(['id', 'name', 'description']);
+
+        return inertia('admin/users/Create', [
+            'availableRoles' => $availableRoles
+        ]);
     }
 
     /**
@@ -101,7 +105,7 @@ class UserController extends OptimizedBaseController
 
         $this->authorize('view', $user);
 
-        return inertia('Admin/Users/Show', [
+        return inertia('admin/users/Show', [
             'user' => $user,
         ]);
     }
@@ -123,8 +127,11 @@ class UserController extends OptimizedBaseController
 
         $this->authorize('update', $user);
 
-        return inertia('Admin/Users/Edit', [
-            'user' => $user,
+        $availableRoles = \Spatie\Permission\Models\Role::all(['id', 'name', 'description']);
+
+        return inertia('admin/users/Edit', [
+            'user' => $user->load(['roles', 'staff']),
+            'availableRoles' => $availableRoles
         ]);
     }
 

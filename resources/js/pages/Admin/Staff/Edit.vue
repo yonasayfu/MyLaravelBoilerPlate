@@ -285,7 +285,7 @@
                   ]"
                 />
                 <datalist id="positions-list">
-                  <option v-for="position in positions" :key="position" :value="position">
+                  <option v-for="position in positions" :key="position" :value="position" />
                 </datalist>
                 <p v-if="errors.position" class="mt-1 text-sm text-red-600">{{ errors.position }}</p>
               </div>
@@ -306,7 +306,7 @@
                   ]"
                 />
                 <datalist id="departments-list">
-                  <option v-for="dept in departments" :key="dept" :value="dept">
+                  <option v-for="dept in departments" :key="dept" :value="dept" />
                 </datalist>
                 <p v-if="errors.department" class="mt-1 text-sm text-red-600">{{ errors.department }}</p>
               </div>
