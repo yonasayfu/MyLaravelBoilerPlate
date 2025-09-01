@@ -24,6 +24,17 @@ This guide provides exact steps, data inputs, and expected results for manual te
 -- Verify tables exist:
 SHOW TABLES;
 -- Expected: users, staff, messages, etc.
+
+-- Verify test users exist (should show 22 users):
+SELECT COUNT(*) FROM users;
+
+-- Check specific test users:
+SELECT name, email FROM users WHERE email IN (
+  'admin@test.com',
+  'john.doe@test.com',
+  'ceo@test.com',
+  'superadmin@test.com'
+);
 ```
 
 ---
@@ -99,8 +110,8 @@ SHOW TABLES;
 🎯 OBJECTIVE: Login with existing credentials
 
 📋 PREPARATION:
-- Use web app to create user: admin@test.com / password123
-- Or use seeded admin user from database
+- Database seeded with test users (run: php artisan migrate:fresh --seed)
+- Test users available: admin@test.com, john.doe@test.com, ceo@test.com, etc.
 
 📋 STEPS:
 1. On login screen, enter:

@@ -5,12 +5,16 @@
 
 #### **🔧 Setup Commands:**
 ```bash
-# 1. Start Laravel Backend
+# 1. Prepare Database (First Time Only)
 cd /Users/yonassayfu/VSProject/BaseBoilerPlate/laravelBoilerPlate
+php artisan migrate:fresh --seed
+# ✅ Creates test users and sample data
+
+# 2. Start Laravel Backend
 php artisan serve
 # ✅ Server: http://127.0.0.1:8000
 
-# 2. Start Flutter App (New Terminal)
+# 3. Start Flutter App (New Terminal)
 cd flutter_app
 flutter run
 # ✅ Choose: iOS Simulator (recommended for Mac M1)
@@ -18,19 +22,37 @@ flutter run
 
 #### **📱 Test Data Ready to Use:**
 
-##### **🔐 Login Credentials:**
+##### **🔐 Pre-Created Login Credentials (Ready to Use):**
 ```
+✅ ADMIN USER:
 Email: admin@test.com
 Password: password123
 
-Email: john.doe@test.com  
+✅ REGULAR USER:
+Email: john.doe@test.com
+Password: password123
+
+✅ CEO USER:
+Email: ceo@test.com
+Password: password123
+
+✅ COO USER:
+Email: coo@test.com
+Password: password123
+
+✅ SUPER ADMIN:
+Email: superadmin@test.com
+Password: password123
+
+✅ EXISTING USER (Jane Smith):
+Email: jane.smith@test.com
 Password: password123
 ```
 
-##### **👤 Registration Test Data:**
+##### **👤 New Registration Test Data:**
 ```
-Name: Jane Smith
-Email: jane.smith@test.com
+Name: Mike Johnson
+Email: mike.johnson@test.com
 Password: password123
 Confirm: password123
 ```
@@ -100,11 +122,19 @@ Confirm: password123
 
 #### **🗄️ Database Checks:**
 ```sql
--- Check users exist
+-- Check users exist (should show 22 users)
 SELECT COUNT(*) FROM users;
 
--- Check specific user
-SELECT * FROM users WHERE email='admin@test.com';
+-- Check specific test users
+SELECT name, email FROM users WHERE email IN (
+  'admin@test.com',
+  'john.doe@test.com',
+  'ceo@test.com',
+  'superadmin@test.com'
+);
+
+-- Check all test users
+SELECT name, email FROM users WHERE email LIKE '%@test.com';
 
 -- Check messages
 SELECT COUNT(*) FROM messages;
@@ -136,8 +166,9 @@ php artisan serve
 
 ##### **🔴 "No users found" in mobile app:**
 ```bash
-# Fix: Seed database
+# Fix: Seed database with test users
 php artisan migrate:fresh --seed
+# ✅ Creates 22 users including all test accounts
 ```
 
 ##### **🔴 Flutter build errors:**
