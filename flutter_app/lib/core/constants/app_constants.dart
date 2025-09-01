@@ -7,10 +7,10 @@ class AppConstants {
   
   // API Configuration
   // For localhost testing:
-  // iOS Simulator: 'http://127.0.0.1:8000'
-  // Android Emulator: 'http://10.0.2.2:8000'
-  // Physical Device: 'http://YOUR_LOCAL_IP:8000'
-  static const String baseUrl = 'http://127.0.0.1:8000';
+  // iOS Simulator: 'http://127.0.0.1:8002'
+  // Android Emulator: 'http://10.0.2.2:8002'
+  // Physical Device: 'http://YOUR_LOCAL_IP:8002'
+  static const String baseUrl = 'http://127.0.0.1:8002';
   static const String apiVersion = 'v1';
   static const String apiBaseUrl = '$baseUrl/api/$apiVersion';
   

@@ -12,7 +12,7 @@ php artisan migrate:fresh --seed
 
 # 2. Start Laravel Backend
 php artisan serve
-# ✅ Server: http://127.0.0.1:8000
+# ✅ Server: http://127.0.0.1:8002 (or next available port)
 
 # 3. Start Flutter App (New Terminal)
 cd flutter_app
