@@ -57,6 +57,16 @@ A comprehensive, production-ready Laravel boilerplate following Clean Architectu
 - ✅ **Code quality** tools (ESLint, Prettier, Pint)
 - ✅ **API documentation** generation
 
+### 🚀 **Enhanced Features Added**
+- ✅ **Advanced RBAC System** with comprehensive role and permission management
+- ✅ **Messaging System** with file attachments, read receipts, and conversation management
+- ✅ **Notification System** with multi-channel support, preferences, and statistics
+- ✅ **Global Search** with entity-wide search, suggestions, and advanced filtering
+- ✅ **Enhanced API** with comprehensive endpoints, resources, and authentication
+- ✅ **File Management** with secure uploads, validation, and cloud storage support
+- ✅ **Performance Optimization** with multi-layer caching and query optimization
+- ✅ **Configuration Management** with feature toggles and environment settings
+
 ## 📦 What's Included
 
 ### Backend Components
@@ -120,6 +130,15 @@ resources/js/
 - Composer 2.5+
 - PostgreSQL or MySQL
 - Redis (optional, for caching)
+
+### New Commands Added
+```bash
+# Initialize RBAC system with default roles and permissions
+php artisan rbac:initialize
+
+# Force initialization (overwrites existing roles)
+php artisan rbac:initialize --force
+```
 
 ### Installation
 

@@ -95,3 +95,46 @@ test-routes.js
 
 # Separate projects
 mailcatcher/
+
+# Flutter specific
+flutter_app/.dart_tool/
+flutter_app/.flutter-plugins
+flutter_app/.flutter-plugins-dependencies
+flutter_app/.packages
+flutter_app/.pub-cache/
+flutter_app/.pub/
+flutter_app/build/
+flutter_app/ios/Flutter/Generated.xcconfig
+flutter_app/ios/Flutter/flutter_export_environment.sh
+flutter_app/ios/Runner/GeneratedPluginRegistrant.*
+flutter_app/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+flutter_app/android/local.properties
+flutter_app/android/key.properties
+flutter_app/.metadata
+flutter_app/pubspec.lock
+
+# Flutter build artifacts
+flutter_app/ios/Flutter/App.framework
+flutter_app/ios/Flutter/Flutter.framework
+flutter_app/ios/Flutter/Flutter.podspec
+flutter_app/ios/ServiceDefinitions.json
+flutter_app/ios/Runner/GeneratedPluginRegistrant.h
+flutter_app/ios/Runner/GeneratedPluginRegistrant.m
+flutter_app/android/app/src/main/kotlin/com/example/*/MainActivity.kt
+
+# Generated files
+flutter_app/**/*.g.dart
+flutter_app/**/*.freezed.dart
+flutter_app/**/*.config.dart
+flutter_app/**/*.gr.dart
+
+# IDE
+flutter_app/.vscode/
+flutter_app/.idea/
+flutter_app/*.iml
+flutter_app/*.ipr
+flutter_app/*.iws
+
+# Exceptions - Keep important generated files
+!flutter_app/lib/**/*.g.dart
+!flutter_app/lib/**/*.config.dart
